@@ -44,8 +44,13 @@ public class Main {
     }
     static ArrayList<String> addTask(ArrayList a){
         Scanner input= new Scanner(System.in);
-        System.out.println("Please add a task.");
-        a.add(input.nextLine());
+        System.out.println("Please give the task a name.");
+        String taskName=input.nextLine();
+        System.out.println("Please give a description of a task.");
+        String taskDescription=input.nextLine();
+        System.out.println("Give this task a priority from 1-5, with 5 being the most important.");
+        int taskPriority=input.nextInt();
+        myTask.add(theNewTask);
         return a;
     }
     static ArrayList<String> removeTask(ArrayList b){
