@@ -14,7 +14,7 @@ public class Task {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name=name;
     }
 
     public String getDescription() {
@@ -35,10 +35,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", priority=" + priority +
-                '}';
+        return name;
     }
 }
