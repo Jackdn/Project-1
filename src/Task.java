@@ -1,9 +1,11 @@
-public class Task {
+import java.util.Iterator;
+
+public class Task implements Comparable<Task>, Iterable<Task>{
     private String name;
     private String description;
-    private int priority;
+    private String priority;
 
-    public Task(String name, String description, int priority) {
+    public Task(String name, String description, String priority) {
         this.name = name;
         this.description = description;
         this.priority = priority;
@@ -25,12 +27,26 @@ public class Task {
         this.description = description;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if(this.priority.equals(other.priority)){
+            return this.name.compareTo(other.name);
+        }else{
+            return this.priority.compareTo(other.priority);
+        }
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return null;
     }
 
     @Override

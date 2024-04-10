@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
@@ -69,15 +70,15 @@ public class Main {
         String newTaskDescription=input.nextLine();
 
         System.out.println("Give this task a priority from 1-5, with 5 being the most important.");
-        int newTaskPriority=input.nextInt();
+        String newTaskPriority=input.nextLine();
 
         boolean validInput=false;
         while (!validInput){
             switch(newTaskPriority){
-                case 1,2,3,4,5 ->validInput=true;
+                case "1", "2", "3", "4", "5" ->validInput=true;
                 default -> {
                     System.out.println("This is not a valid priority, please input a valid priority.");
-                    newTaskPriority=parseInt(input.nextLine());
+                    newTaskPriority=input.nextLine();
                 }
             }
         }
@@ -102,12 +103,13 @@ public class Main {
         String updateddescription=input.nextLine();
 
         System.out.println("What is the priority of the updated task?");
-        int updatedPriority=parseInt(input.nextLine());
+        String updatedPriority=(input.nextLine());
 
         Task updatedTask=new Task(updatedTitle,updateddescription,updatedPriority);
         tasks.set(taskindex, updatedTask);
     }
     static void listTasks(){
+        Collections.sort(tasks);
         System.out.println("what priority would you like to list? (1-5)");
         String priority=input.nextLine();
         boolean validPriority=false;
@@ -116,7 +118,7 @@ public class Main {
                 case "1","2","3","4","5" -> {
                     validPriority=true;
                     for(Task task:tasks){
-                        if (task.getPriority()==parseInt(priority)){
+                        if (task.getPriority()==(priority)){
                             System.out.println(task);
                         }
                     }
@@ -126,6 +128,7 @@ public class Main {
     }
 }
     static void listAllTasks(){
+        Collections.sort(tasks);
         System.out.println(tasks);
     }
 }
