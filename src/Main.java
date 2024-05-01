@@ -1,3 +1,12 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -8,6 +17,7 @@ public class Main {
     public static  ArrayList<Task>tasks=new ArrayList<>();
     public static void main(String[] args){
         try{
+            deserializeTask();
         System.out.println("Please choose an option:\n" +
                 "(1) Add a task.\n" +
                 "(2) Remove a task.\n" +
@@ -55,6 +65,7 @@ public class Main {
                     "(0) Exit.");
             userInput=input.nextLine();
             }
+            serializeTask();
 
         }catch (Exception e){
             System.out.println("Something went wrong. Please try running the code again.");
@@ -130,5 +141,29 @@ public class Main {
     static void listAllTasks(){
         Collections.sort(tasks);
         System.out.println(tasks);
+    }
+
+    static void serializeTask(){
+        Gson gson=new Gson();
+        try (FileWriter writer=new FileWriter("data.json")){
+            gson.toJson(tasks,writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    static void deserializeTask(){
+        try (FileReader reader=new FileReader("data.json")){
+            JsonParser parser=new JsonParser();
+            JsonElement jsonelement=parser.parse(reader);
+            Gson gson=new Gson();
+            Type type=new TypeToken<ArrayList<Task>>(){}.getType();
+            tasks=gson.fromJson(jsonelement, type);
+            System.out.println(tasks);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
